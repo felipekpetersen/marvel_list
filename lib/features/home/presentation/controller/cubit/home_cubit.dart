@@ -14,9 +14,22 @@ class HomeCubit extends Cubit<HomeState> {
 
   Future<void> getCharacters() async {
     emit(HomeLoading());
-    final charactersModel = await characterRepository.getCharacters();
-    final List<Character> characters = List<Character>.from(
-        (charactersModel.data!.results as List));
+    final charactersModel = await characterRepository.getCharacters(0);
+    final List<Character> characters =
+        List<Character>.from((charactersModel.data!.results as List));
+
     emit(HomeLoaded(characters: characters));
+  }
+
+  Future<void> getMoreCharacters() async {
+    final currentState = state;
+    if (currentState is HomeLoaded) {
+      final charactersModel =
+          await characterRepository.getCharacters(currentState.characters.length);
+      final List<Character> characters =
+          List<Character>.from((charactersModel.data!.results as List));
+      currentState.characters.addAll(characters);
+      emit(HomeLoaded(characters: currentState.characters));
+    }
   }
 }

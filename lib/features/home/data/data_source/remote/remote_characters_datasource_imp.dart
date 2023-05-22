@@ -11,10 +11,16 @@ class RemoteCharactersDataSourceImp implements RemoteCharactersDataSource {
   RemoteCharactersDataSourceImp({required this.dio});
 
   @override
-  Future<CharacterModel> getCharacters() async {
-    final response = await DioHelper.getData(path: Constants.getCharacters);
+  Future<CharacterModel> getCharacters(int offset) async {
+    final query = {
+      'apikey': Constants.publicApiKey,
+      'ts': Constants.ts,
+      'hash': Constants.hash,
+      'offset': offset
+    };
+    final response = await DioHelper.getData(path: Constants.getCharacters, query: query);
     final data = response.data;
-        
+
     return CharacterModel.fromJson(data);
   }
 }

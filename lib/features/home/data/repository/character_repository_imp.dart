@@ -9,7 +9,7 @@ class CharacterRepositoryImp extends CharacterRepository {
   CharacterRepositoryImp({required this.remoteCharactersDataSource});
 
   @override
-  Future<CharacterModel> getCharacters() async {
-    return await remoteCharactersDataSource.getCharacters();
+  Future<CharacterModel> getCharacters(int offset) async {
+    return await remoteCharactersDataSource.getCharacters(offset);
   }
 }
