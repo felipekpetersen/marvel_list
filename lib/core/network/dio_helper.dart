@@ -16,12 +16,14 @@ class DioHelper {
   }
 
   static Future<Response> getData(
-      {required String url, Map<String, dynamic>? query}) async {
+      {required String path, Map<String, dynamic>? query}) async {
+    final url = Constants.baseURL + path;
     query ??= {
       'apikey': Constants.publicApiKey,
       'ts': Constants.ts,
       'hash': Constants.hash,
     };
+    print(url);
     return await dio.get(url, queryParameters: query);
   }
 

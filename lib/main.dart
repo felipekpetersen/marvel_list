@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marvel_list/core/di/dependency_controller.dart';
 import 'package:marvel_list/core/network/dio_helper.dart';
+import 'package:marvel_list/features/home/data/repository/character_repository_imp.dart';
+import 'package:marvel_list/features/home/presentation/controller/cubit/home_cubit.dart';
 import 'package:marvel_list/features/home/presentation/home_page.dart';
+
+import 'features/home/data/repository/character_repository.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +28,10 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HomePage()
+      home: BlocProvider(
+        create: (context) => HomeCubit(characterRepository: getIt<CharacterRepositoryImp>()),
+        child: const HomePage(),
+      )
     );
   }
 }
