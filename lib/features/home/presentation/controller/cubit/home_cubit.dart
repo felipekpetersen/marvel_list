@@ -1,7 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-
-import '../../../data/data_source/remote/character_model.dart';
 import '../../../data/repository/character_repository_imp.dart';
 import '../../../domain/entity/character.dart';
 
@@ -12,24 +10,44 @@ class HomeCubit extends Cubit<HomeState> {
 
   HomeCubit({required this.characterRepository}) : super(HomeInitial());
 
+  static const int _horizontalCount = 5;
+  int _heroCount = 0;
+  bool _loadingHeroes = false;
+
   Future<void> getCharacters() async {
     emit(HomeLoading());
     final charactersModel = await characterRepository.getCharacters(0);
     final List<Character> characters =
         List<Character>.from((charactersModel.data!.results as List));
 
-    emit(HomeLoaded(characters: characters));
+    final List<Character> verticalCharacters =
+        characters.getRange(_horizontalCount, characters.length).toList();
+
+    final List<Character> horizontalCharacters =
+        characters.getRange(0, _horizontalCount).toList();
+
+    _heroCount = horizontalCharacters.length + verticalCharacters.length;
+
+    emit(HomeLoaded(
+        verticalCharacters: verticalCharacters,
+        horizontalCharacters: horizontalCharacters));
   }
 
   Future<void> getMoreCharacters() async {
     final currentState = state;
-    if (currentState is HomeLoaded) {
+    if (currentState is HomeLoaded && !_loadingHeroes) {
+      print(_heroCount);
+      _loadingHeroes = true;
       final charactersModel =
-          await characterRepository.getCharacters(currentState.characters.length);
+          await characterRepository.getCharacters(_heroCount);
       final List<Character> characters =
           List<Character>.from((charactersModel.data!.results as List));
-      currentState.characters.addAll(characters);
-      emit(HomeLoaded(characters: currentState.characters));
+      currentState.verticalCharacters.addAll(characters);
+      _heroCount += characters.length;
+      _loadingHeroes = false;
+      emit(HomeLoaded(
+          verticalCharacters: currentState.verticalCharacters,
+          horizontalCharacters: currentState.horizontalCharacters));
     }
   }
 }
