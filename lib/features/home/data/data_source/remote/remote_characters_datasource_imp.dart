@@ -6,9 +6,6 @@ import 'character_model.dart';
 import 'remote_characters_datasource.dart';
 
 class RemoteCharactersDataSourceImp implements RemoteCharactersDataSource {
-  final Dio dio;
-
-  RemoteCharactersDataSourceImp({required this.dio});
 
   @override
   Future<CharacterModel> getCharacters(int offset) async {

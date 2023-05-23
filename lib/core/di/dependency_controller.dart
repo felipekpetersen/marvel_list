@@ -10,11 +10,8 @@ final getIt = GetIt.instance;
 
 class ServiceLocator {
   void init() {
-    final Dio dio = Dio();
-    getIt.registerLazySingleton<Dio>(() => dio);
-
     // Data Source 
-    getIt.registerLazySingleton<RemoteCharactersDataSource>(() => RemoteCharactersDataSourceImp(dio: getIt.get()));
+    getIt.registerLazySingleton<RemoteCharactersDataSource>(() => RemoteCharactersDataSourceImp());
 
     //Repository
     getIt.registerLazySingleton<CharacterRepositoryImp>(() => CharacterRepositoryImp(remoteCharactersDataSource: getIt.get()));
