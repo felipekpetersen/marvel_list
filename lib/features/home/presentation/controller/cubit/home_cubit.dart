@@ -1,4 +1,6 @@
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
+import 'package:marvel_list/features/home/data/data_source/remote/character_model.dart';
 import 'package:meta/meta.dart';
 import '../../../data/repository/character_repository_imp.dart';
 import '../../../domain/entity/character.dart';
@@ -8,7 +10,7 @@ part 'home_state.dart';
 class HomeCubit extends Cubit<HomeState> {
   final CharacterRepositoryImp characterRepository;
 
-  HomeCubit({required this.characterRepository}) : super(HomeInitial());
+  HomeCubit({required this.characterRepository,}) : super(HomeInitial());
 
   static const int _horizontalCount = 5;
   int _heroCount = 0;

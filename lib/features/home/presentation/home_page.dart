@@ -97,6 +97,7 @@ SizedBox get _horizontalSpacing => const SizedBox(width: 8);
         height: 200,
         width: double.infinity,
         child: ListView.builder(
+          key: const Key('horizontal_list'),
             scrollDirection: Axis.horizontal,
             itemCount: _homeCubit.state.horizontalCharacters.length,
             itemBuilder: (context, index) {
@@ -105,6 +106,7 @@ SizedBox get _horizontalSpacing => const SizedBox(width: 8);
       );
 
   Widget get _verticalList => ListView.builder(
+    key: const Key('vertical_list'),
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         itemCount: _homeCubit.state.verticalCharacters.length,
