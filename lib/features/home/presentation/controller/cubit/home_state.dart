@@ -10,6 +10,9 @@ abstract class HomeState extends Equatable {
       {this.offset = 0,
       this.verticalCharacters = const [],
       this.horizontalCharacters = const []});
+
+  @override
+  List<Object?> get props => [offset, verticalCharacters, horizontalCharacters];
 }
 
 class HomeInitial extends HomeState {
@@ -33,5 +36,5 @@ class HomeLoaded extends HomeState {
 
   @override
   List<Object?> get props =>
-      [super.verticalCharacters, super.horizontalCharacters];
+      [verticalCharacters, horizontalCharacters];
 }
