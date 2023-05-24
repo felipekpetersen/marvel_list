@@ -47,9 +47,10 @@ Para a criação desse projeto, segui a seguinte linha de raciocínio:
 
 ### Detalhes importantes
 - Toda lógica para construção da tela em si (separação dos dados, gets, etc) ficam centralizados dentro do Cubit. 
-- Existiria o cenário da construção de um UserCase, porém, pela pequena proporção do projeto, optei por não usar.
+- Existiria o cenário da construção de um UseCase, porém, pela pequena proporção do projeto, optei por não usar.
 - Caso existissem outras fontes de dados ou lógicas mais complexas da tela inicial, o ideial não seria o uso de apenas um Cubit, e sim um para cada implementação. Neste caso, foi utilizado apenas um, porém nada impede a construção de novos e usar "multi bloc provider" para atender todas demandas. 
 - Toda a lógica do modelo de herói é separada do modelo retornado pela API. Dessa forma, caso mudar a API para atender heróis da DC por exemplo, não precisariamos mexer em nada dos arquivos de presentation.
 
 ## Obrigado!
 Qualquer dúvida sobre o projeto, não deixe de me questionar! 
+https://www.linkedin.com/in/felipekpetersen/
