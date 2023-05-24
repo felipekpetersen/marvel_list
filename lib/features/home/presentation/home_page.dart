@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     _homeCubit.getCharacters();
-
+    
     _scrollController.addListener(() {
       var nextPageTrigger = 0.8 * _scrollController.position.maxScrollExtent;
       if (_scrollController.position.pixels > nextPageTrigger) {
